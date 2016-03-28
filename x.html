@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>My-template - Free bootstrap 3 one page template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Font Awesome -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    
+    <!-- Animation -->
+    <link href="css/animate.css" rel="stylesheet" />
+    
+    <!-- MyTemplate CSS -->
+    <link href="css/style.css" rel="stylesheet">
+
+
+
+    <style>
+                .dropbtn {
+                    background-color: #ff4d4d;
+                    color: white;
+                    padding: 16px;
+                    font-size: 16px;
+                    border: none;
+                    cursor: pointer;
+                }
+
+                .dropbtn:hover, .dropbtn:focus {
+                    background-color:#ff4d4d;
+                }
+
+                .dropdown {
+                    position: relative;
+                    display: inline-block;
+                }
+
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: #ff4d4d;
+                    min-width: 160px;
+                    overflow: auto;
+                    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                }
+
+                .dropdown-content a {
+                    color: black;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                .dropdown a:hover {background-color: #ff4d4d}
+
+                .show {display:block;}
+</style>
+
+    
+</head>
+
+<body>
+
+    <header id="header-banner">
+        <nav class="navbar navbar-default navbar-fixed-top fadeIn" role="navigation">
+            <div class="container">
+                
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#dropdown-box-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-brand">
+                        <a href="#">WELCOME</a>
+                    </div>
+                </div>
+                
+                <!-- Collect the nav links and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-right" id="dropdown-box-1">
+                    
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#home">HOME</a></li>
+                        <li><a href="#aboutus">ABOUT</a></li>
+                        <li class="dropdown" role="presentation">
+                            <div class="dropdown">
+                            <button onclick="myFunction()" class="dropbtn">ITEMS</button>
+                              <div id="myDropdown" class="dropdown-content">
+                                <a href="#home">Home</a>
+                                <a href="#about">About</a>
+                                <a href="#contact">Contact</a>
+                              </div>
+                            </div>
+                        </li>
+                        <li><a href="#testimonials">MORE</a></li>
+                        <li><a href="#contactus">CONTACT</a></li>
+                    </ul>
+                    
+                </div>
+                
+            </div> <!-- /.container -->
+        </nav> <!-- /.nav -->
+    </header>
+
+
+<script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+</script>
+        
+        </body>
+        </html>
