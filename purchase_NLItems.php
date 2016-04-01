@@ -31,10 +31,10 @@ function goback()
 
 <body>
 
-<div id="header">
+<!-- <div id="header">
 Stores and Purchase Management
 
-</div>
+</div> -->
 <div>
 <div id="sidebar">
 <?php
@@ -49,18 +49,20 @@ Stores and Purchase Management
 
 <form action="purchase_NLItems.php" method="post" name="frm">
   <fieldset>
-    <legend>Item Information</legend>
+   <br><br><br><br><br>
+   <b>ITEM DETAILS</b>
+   <br><br>
     Item<br>
-    <input name="itemName" type="text" size="40" /><br>
+    <input name="itemName" required="required"type="text" size="40" /><br>
 
     Online Store URL<br>
-    <input name="URL" type="text" size="40" /><br>
+    <input name="URL" required ="required" type="text" size="40" /><br>
     Item Details<br>
-    <input name="itemDetails" type="text" size="40" /><br>
+    <input name="itemDetails" required="required" type= "text"size="40" /><br>
     Price<br>
-    <input name="itemPrice" type="float"  size="40" /><br>
+    <input  name="itemPrice" required="required" type= "float" pattern ="[^[-+]?([0-9]+(\.[0-9]+)?|\.[0-9]+)$+]" size="40" /><br>
     Quantity<br>
-    <input name="itemQuantity" type="number" class="form-control"  size="40" /><br>
+    <input name="itemQuantity" required= "required" type="number" size="40" /><br>
     <br>
     <input  name= "sub" type="submit" value="submit"/>
   </fieldset>

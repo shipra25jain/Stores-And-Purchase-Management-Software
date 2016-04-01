@@ -59,6 +59,7 @@ $Viewer = $_SESSION['login_user'];
 ?>
      <table class="table">
                 <tr>
+                    <th></th>
                     <th>
                         Item ID 
                     </th>
@@ -75,7 +76,7 @@ $Viewer = $_SESSION['login_user'];
                         Status
                     </th>
                     <th>
-                        Seen
+                        Clear
                     </th>
                 </tr>
 <?php
@@ -87,15 +88,16 @@ $Viewer = $_SESSION['login_user'];
       <form action="" method="post" role="form">
       <div class="row">
       
-      <table >
+      <table class= 'table'>
       <tr>
-      <td width=10%><input class="form-control" name="ID" type="text" value="<?php echo $Ndetails[$i]["ID"]; ?>" size="20" readonly/></td>
+        <td width = 2%></td>
+      <td width=3%><input class="form-control" name="ID" type="text" value="<?php echo $Ndetails[$i]["ID"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="itemName" type="text" value="<?php echo $Ndetails[$i]["itemName"]; ?>" size="20" readonly/></td>
       
       <td width=10%><input class="form-control" name="price" type="text" value="<?php echo $Ndetails[$i]["price"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="quantity" type="text" value="<?php echo $Ndetails[$i]["quantity"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="status" type="text" value="<?php echo $Ndetails[$i]["status"]; ?>" size="20" readonly/></td>
-      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Seen</button> </td>
+      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Clear</button> </td>
       </tr>
      
       

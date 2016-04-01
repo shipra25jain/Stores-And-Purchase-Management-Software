@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
 require_once 'include/DB_Functions.php';
 include_once("Faculty.html");
 require_once 'include/nonlistedItems.php';
@@ -72,20 +78,40 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
     // output data of each row
     ?>
     <br><br>
-    Item Name
+    <b>LISTED ITEMS</b><br><br>
+    <table  table-layout: fixed; >
+
+        <tr>
+          <!-- <td  width= 20% > <?php echo "SNo"; ?> </td> -->
+          <td width =2%> </td>
+
+          <td  width= 20% > <b>Item Name </b> </td>
+          <td  width= 25% > <b>Consumability </b> </td>
+          <td  width= 25% > <b>Quantity </b> </td>
+          <!-- <td  width= 25% > <b>Stakeholder </b> </td> -->
+          <td  width= 25% > <b>Return</b> </td>
+          <td  width= 25% > <b>Repair </b> </td>
+        </tr>
+
+     </table>
     <?php
     while($row = mysql_fetch_assoc($result)) {
       //$_SESSION['item1'] = $row['name'];
       $consumability = $row['consumability'];
       ?>
       <form action="" method="post" name="frm">
-        <table >
+        <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
+        
+        <table class="table" >
 
 <tr>
-  <td  width = 10% > </td>
-  <td  width = 50% > <?php echo $row['name']; ?> </td>
-  <td  width = 50% > <button  type = "submit" name="Return" class="btn btn-success">Return</button></td>
-  <td  width = 50% > <button name = "Repair" type = "submit" class="btn btn-success">Repair</button></td>
+  <td > </td>
+  <td  width = 25% > <?php echo $row['name']; ?> </td>
+  <td  width = 25% > <?php echo $row['consumability']; ?> </td>
+  <td  width = 25% > <?php echo $row['quantity']; ?> </td>
+
+  <td  width = 25% > <button  type = "submit" name="Return" class="btn btn-success">Return</button></td>
+  <td  width = 25% > <button name = "Repair" type = "submit" class="btn btn-success">Repair</button></td>
 </tr>
 
 </table>
@@ -101,10 +127,7 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 }?>
    
  <br><br>
- <?php
-    echo "NON-LISTED PRODUCTS";
-    
-    ?>
+ <b>NON-LISTED PRODUCTS</b>
     <br><br>
     <?php
    $username = $_SESSION['login_user'];
@@ -117,21 +140,34 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
    if (mysql_num_rows($result) > 0) {
     // output data of each row
     ?>
-    
-    Item Name
+    <table   table-layout: fixed; >
+
+        <tr>
+          <!-- <td  width= 20% > <?php echo "SNo"; ?> </td> -->
+          <td width = 2%> </td>
+          <td  width= 39% > <b>ItemName </b> </td>
+          <td  width= 37% > <b>Price </b> </td>
+          <td  width= 37% > <b>Quantity </b> </td>
+          <td  width= 40% > <b>Repair</b> </td>
+        </tr>
+
+     </table>
     <?php
     while($row = mysql_fetch_assoc($result)) {
       //$_SESSION['item1'] = $row['name'];
       //$consumability = $row['consumability'];
       ?>
       <form action="" method="post" name="frm">
-        <table>
+        <input type="hidden" name="name" value="<?php echo $row['itemName']; ?>">
+       <table class='table'>
 
 <tr>
-  <td  width = 10% > </td>
-  <td  width = 100% > <?php echo $row['itemName']; ?> </td>
+  <td width =2% > </td>
+  <td  width = 40% > <?php echo $row['itemName']; ?> </td>
+  <td  width = 40% > <?php echo $row['price']; ?> </td>
+  <td  width = 40% > <?php echo $row['quantity']; ?> </td>
   <!-- <td  width = 50% > <button  type = "submit" name="Return" class="btn btn-success">Return</button></td> -->
-  <td  width = 50% > <button name = "nRepair" type = "submit" class="btn btn-success">Repair</button></td>
+  <td  width = 40% > <button name = "nRepair" type = "submit" class="btn btn-success">Repair</button></td>
 </tr>
 
 </table>
@@ -148,9 +184,7 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
  
       <br><br>
 
- <?php
-    echo "APPROVAL PENDING";
-    ?>
+ <b>APPROVAL PENDING</b>
     <br><br>
     <?php
    $username = $_SESSION['login_user'];
@@ -164,7 +198,7 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
     // output data of each row
     ?>
       
-      Item Name
+      <b>Item Name</b>
     <?php
     while($row = mysql_fetch_assoc($result)) {
       //$_SESSION['item1'] = $row['name'];
@@ -173,7 +207,7 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
       <form action="" method="post" name="frm">
         <table>
 
-<tr><td><input name="name" type="text" value="<?php echo $row['itemName']; ?>" size="10" readonly/></td></tr>
+<tr><td><input  class= "form-control" name="name" type="text" value="<?php echo $row['itemName']; ?>" size="10" readonly/></td></tr>
 
 </table>
 </form>
@@ -189,8 +223,7 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
  
       
 
-   
-
+  
 
  
 </div>
@@ -198,3 +231,6 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 
  </body>
 </html>
+<?php
+}
+?>

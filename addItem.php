@@ -1,5 +1,12 @@
 <?php
 session_start();
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
+include_once("Admin.html");
 require_once 'include/DB_Functions.php';
 require_once 'include/listedItems.php';
 $db = new DB_Functions();
@@ -23,14 +30,20 @@ function goback()
 </head>
 
 <body>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <div id="header">
-Stores and Purchase Management
+<!-- Stores and Purchase Management -->
 
 </div>
 <div>
 <div id="sidebar">
-
+<?php
+?>
 </div>
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div>
@@ -38,18 +51,6 @@ Stores and Purchase Management
  ?>
 </div>
 <form action="/tpa/addItem.php" method="post" name="frm">
-  <?php
-/*
-  $query = "SELECT * FROM Inventory_items_DB"; //You don't need a ; like you do in SQL
-$result = mysql_query($query);
-  echo "<table>"; // start a table tag in the HTML
-
-while($row = mysql_fetch_array($result)){   //Creates a loop to loop through results
-echo "<tr><td>" . $row['name'] . "</td><td>" . $row['quantity'] . "</td></tr>";  //$row['index'] the index here is a field name
-}*/
-
-?>
-
 <B>Items:</B> <BR>
 <SELECT NAME="item" SIZE="5" MULTIPLE >
 <OPTION SELECTED> Chair
@@ -62,7 +63,7 @@ echo "<tr><td>" . $row['name'] . "</td><td>" . $row['quantity'] . "</td></tr>"; 
 </SELECT>
 <br>
 Quantity needed:<br>
-<input name="quantity" type="number" min = "1" max = "10" />
+<input name="quantity" type="number" min = "1" />
 <br>
 <input name="sub" type="submit" value="submit"/><br>
 
@@ -77,14 +78,25 @@ Quantity needed:<br>
     $login_user = $_SESSION['login_user'];
     $itemName = $_POST['item'];
     $myQuantity = $_POST['quantity'];
-    $query= "SELECT itemID FROM Inventory_items_DB where name = '$itemName'";
+    $query= "SELECT * FROM Inventory_items_DB where name = '$itemName'";
     $result=mysql_query($query) or die("query error");
-     $query_data=mysql_fetch_array($result);
-    $myID = $query_data['itemID'];
-    $li = new listedItems($myID);
+    $query_data=mysql_fetch_array($result);
+    $add = $_POST['quantity'];
+    $new_quantity = $add + $query_data['quantity'];
+   $query="UPDATE Inventory_items_DB SET quantity = '$new_quantity' WHERE name = '$itemName'";
+
+   $result=mysql_query($query) or die("query error");
+   echo "<script>  alert('Item has been sucessfully added in the inventory')</script>";
+    //$myID = $query_data['itemID'];
+    //$price = $query_data['price'];
+    //$li = new listedItems($myID);
     //echo "All Well";
-    $check_min_quant = $li->setAttributes($itemName,$myQuantity);
-    $li->putinDB_increase($login_user, $myQuantity);
+    //$li->setAttributes($itemName,$myQuantity);
+    //$li->putinDB($login_user, $myQuantity);
+    //$Viewer = "admin";
+    //$status = "success";
+
+    //$db->convey_requester($login_user,$Viewer ,$itemName,$myQuantity,$price,$status)
     //$li->storeInDatabase();
    // $shareStatus = $li->getSharability();
    //$quantity=$_POST['quantity'];
@@ -102,19 +114,30 @@ if($check_min_quant == 1)
 myFunction1();
 <?php 
 }
+else
+{
+  ?>
+  myFunction2();
+  <?php
+}
 ?>
 function myFunction1() {
     var txt;
-    var r = confirm("Confirm ");
+    var r = confirm("Confirm by clicking on OK");
     if (r == true) {
-        txt = "Item Added";
+        txt = "Order confirmed";
     } else {
         txt = "Order cancelled";
     }
     document.getElementById("demo").innerHTML = txt;
 }
 
-
+function myFunction2() {
+    var txt;
+    var r = confirm("Exceeded quantity present!!");
+    
+    //document.getElementById("demo").innerHTML = txt;
+}
 </script>
    <?php 
 
@@ -124,3 +147,8 @@ function myFunction1() {
 
 </body>
 </html>
+
+<?php
+
+}
+?>

@@ -80,7 +80,7 @@ Answer<br>
       <form action="register2.php" method="post" name="frm">
       <div class="form-group">
       <h3>Password</h3>
-       <input name="password" type="password" size="40" class="form-controls" /><br>
+       <input required = "required"name="password" type="password" size="40" class="form-controls" /><br>
 
     
       <h3>Security Question</h3>
@@ -89,12 +89,15 @@ Answer<br>
             <option value="pob">Place  of birth</option>
       </select>
       <h3>Answer</h3>
-      <input name="security_answer" type="text" size="40" /><br>
+      <input required="required"name="security_answer" type="text" size="40" /><br>
       <input name="sub" type="submit" value="submit"/><br />
       <div class="reg_section password">
       </div>
 
       </form>
+
+                             <a href="register.php"><h1>Back</h1></a>
+
     
 
 

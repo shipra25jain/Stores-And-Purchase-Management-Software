@@ -32,7 +32,7 @@ $Viewer = $_SESSION['login_user'];
   if(isset($_POST['seen']))
     {
       $ID = $_POST['ID'];
-      //$User = $_POST['User'];
+      $User = $_POST['User'];
       //$Viewer = $_POST['Viewer'];
       $itemName = $_POST['itemName'];
       $quantity = $_POST['quantity'];
@@ -56,27 +56,36 @@ $Viewer = $_SESSION['login_user'];
       echo "<script type='text/javascript'>alert('$message');</script>";
     }
 ?>
-    <table class="table">
+
+
+  <br><br><br><br>
+    <table table-layout: fixed;>
                 <tr>
-                    <th>
-                        Item ID 
-                    </th>
-                    <th>
-                        Item 
-                    </th>
-                    <th>
-                        Price
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                    <th>
-                        Seen
-                    </th>
+                  <td width=2%></td>
+
+                  <td width= 15%>
+                        <b>ID</b> 
+                    </td>
+                      <td width= 17%>
+                        <b>User</b> 
+                    </td>
+                    <td width= 19%>
+                        <b>Item </b>
+                    </td>
+                    <td width= 17%>
+                        <b>Price </b>
+                    </td>
+                    <td width= 15%>
+                        <b>Quantity </b>
+                    </td>
+                    <td width= 14%>
+                        <b>Status </b>
+                    </td>
+                    <td width= 17%>
+                        <b>Clear</b>
+                    </td>
                 </tr>
+          </table>
 <?php
     for($i=0;$i<count($Ndetails);$i++)
     { 
@@ -86,15 +95,17 @@ $Viewer = $_SESSION['login_user'];
       <form action="" method="post" role="form">
       <div class="row">
       
-      <table >
+      <table class="table">
       <tr>
-      <td width=10%><input class="form-control" name="ID" type="text" value="<?php echo $Ndetails[$i]["ID"]; ?>" size="20" readonly/></td>
-      <td width=10%><input class="form-control" name="itemName" type="text" value="<?php echo $Ndetails[$i]["itemName"]; ?>" size="20" readonly/></td>
+      <td width=2%></td>
+      <td width=5%><input class="form-control" name="ID" type="text" value="<?php echo $Ndetails[$i]["ID"]; ?>" size="20" readonly/></td>
+      <td width=18%><input class="form-control" name="User" type="text" value="<?php echo $Ndetails[$i]["User"]; ?>" size="20" readonly/></td>
+      <td width=18%><input class="form-control" name="itemName" type="text" value="<?php echo $Ndetails[$i]["itemName"]; ?>" size="20" readonly/></td>
       
       <td width=10%><input class="form-control" name="price" type="text" value="<?php echo $Ndetails[$i]["price"]; ?>" size="20" readonly/></td>
-      <td width=10%><input class="form-control" name="quantity" type="text" value="<?php echo $Ndetails[$i]["quantity"]; ?>" size="20" readonly/></td>
+      <td width=18%><input class="form-control" name="quantity" type="text" value="<?php echo $Ndetails[$i]["quantity"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="status" type="text" value="<?php echo $Ndetails[$i]["status"]; ?>" size="20" readonly/></td>
-      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Seen</button> </td>
+      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Clear</button> </td>
       </tr>
      
       

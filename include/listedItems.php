@@ -115,7 +115,7 @@ public function setAttributes($itemName,$numOrders)
 	return $check_min_quant;
 }
 
-public function putinDB($Login_user, $myQuantity)
+/*public function putinDB($Login_user, $myQuantity)
 {
 	//add timestamp also
    $count1 = 0;
@@ -157,6 +157,42 @@ public function putinDB($Login_user, $myQuantity)
 	$query = "INSERT INTO LI_Orders(itemID, name, consumability, quantity, stakeholder) VALUES ('$this->itemID', '$this->name','$this->consumability', '$myQuantity','$Login_user')";
 
     $result=mysql_query($query) or die("query error3");
+       // echo "no problem!!!";
+     }
+} */
+
+public function putinDB($Login_user, $myQuantity)
+{
+  //add timestamp also
+$count1 = 0;
+  /* $query = "SELECT * FROM LI_Orders where stakeholder = '$Login_user'";
+   $result = mysql_query($query) or die("query error");
+    $count1 = mysql_num_rows($result);
+    if($count1>0)*/
+  //{
+    $query = "SELECT * FROM LI_Orders WHERE name = '$this->name' AND stakeholder = '$Login_user'";
+    $result=mysql_query($query) or die("query error");
+    $count = mysql_num_rows($result);
+    if($count>0)
+    {
+    //$query = "SELECT quantity FROM LI_Orders WHERE name = '$this->name' AND stakeholder = '$Login_user'";
+    //$result=mysql_query($query) or die("query error");
+    $row = mysql_fetch_assoc($result);
+    $number = $row['quantity'];
+    $number1 = $number + $myQuantity;
+    $query = "UPDATE LI_Orders SET quantity = '$number1' WHERE name = '$this->name' AND stakeholder = '$Login_user'";
+    $result=mysql_query($query) or die("query error");
+    }
+    //}
+    else
+    {
+//echo "I am here";
+  $query = "INSERT INTO LI_Orders (itemID, name,consumability,quantity,stakeholder)
+              VALUES ( '$this->itemID', '$this->name','$this->consumability', '$myQuantity','$Login_user')";
+   // $SNo = $SNo + 1;
+
+              //echo "creating problem!!!";
+    $result=mysql_query($query) or die("query error");
        // echo "no problem!!!";
      }
 }

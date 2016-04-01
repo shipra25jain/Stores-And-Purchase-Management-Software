@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
 include_once("Admin.html");
 require_once 'include/DB_Functions.php';
 require_once 'include/nonlistedItems.php';
@@ -58,12 +64,10 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 <div>
  <br><br><br><br><br>
 
- <?php
-    echo "LISTED PRODUCT ORDERS";
-    ?>
+ <b>LISTED PRODUCT ORDERS</b>
     <br><br>
     <?php
-   $username = $_SESSION['login_user'];
+   $login_user = $_SESSION['login_user'];
    $query="SELECT * FROM LI_Orders";
 
    $result=mysql_query($query) or die("query error");
@@ -80,11 +84,11 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 
 <tr>
   <!-- <td  width= 20% > <?php echo "SNo"; ?> </td> -->
-  <td  width= 25% > <?php echo "Item ID"; ?> </td>
-  <td  width= 25% > <?php echo "Item Name"; ?> </td>
-  <td  width= 25% > <?php echo "Consumability"; ?> </td>
-  <td  width= 25% > <?php echo "Quantity"; ?> </td>
-  <td  width= 25% > <?php echo "Stakeholder"; ?> </td>
+  <td  width= 25% > <b>Item ID </b> </td>
+  <td  width= 25% > <b>Item Name </b> </td>
+  <td  width= 25% > <b>Consumability </b> </td>
+  <td  width= 25% > <b>Quantity </b> </td>
+  <td  width= 25% > <b>Stakeholder </b> </td>
 </tr>
 
 </table>
@@ -94,15 +98,15 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
   
       ?>
       <form action="" method="post" name="frm">
-        <table class="table">
+<table class="table">
 
 <tr>
   <!-- <td width= 20% > <?php echo $row['SNo']; ?> </td> -->
-  <td width= 23%> <?php echo $row['itemID']; ?> </td>
-  <td width= 23%> <?php echo $row['name']; ?> </td>
-  <td width= 23%> <?php echo $row['consumability']; ?> </td>
-  <td width= 23%> <?php echo $row['quantity']; ?> </td>
-  <td width= 23%> <?php echo $row['stakeholder']; ?> </td>
+  <td width= 25%> <?php echo $row['itemID']; ?> </td>
+  <td width= 25%> <?php echo $row['name']; ?> </td>
+  <td width= 25%> <?php echo $row['consumability']; ?> </td>
+  <td width= 25%> <?php echo $row['quantity']; ?> </td>
+  <td width= 25%> <?php echo $row['stakeholder']; ?> </td>
 </tr>
 
 </table>
@@ -119,12 +123,14 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
    
  <br><br>
  <div>
- <?php
-    echo "NON LISTED PRODUCT ORDERS";
-    ?>
-    <br><br>
+    
+ 
+    <b>
+    NON LISTED PRODUCT ORDERS
+  </b>
+    <br><br><br><br>
     <?php
-   $username = $_SESSION['login_user'];
+   $login_user = $_SESSION['login_user'];
    $query="SELECT * FROM NLI_Orders";
 
    $result=mysql_query($query) or die("query error");
@@ -140,12 +146,12 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 <tr>
 
   <!-- <td><?php echo "SNo"; ?></td> -->
-  <td td  width= 20%><?php echo "Stakeholder"; ?></td>
-  <td td  width= 20%><?php echo "Item Name"; ?></td>
-  <td td  width= 20%><?php echo "Quantity"; ?></td>
-  <td td  width= 20%><?php echo "Price"; ?></td>
-  <td td  width= 20%><?php echo "URL"; ?></td>
-  <td td  width= 20%><?php echo "Details"; ?></td>
+  <td td  width= 20%> <b>Stakeholder </b></td>
+  <td td  width= 20%> <b>Item Name</b></td>
+  <td td  width= 20%> <b>Quantity</b></td>
+  <td td  width= 20%><b><?php echo "Price";?></b></td>
+  <td td  width= 20%><b><?php echo "URL"; ?></b></td>
+  <td td  width= 20%><b><?php echo "Details"; ?></b></td>
 
 </tr>
 
@@ -189,6 +195,8 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
  
 </div>
 
-
  </body>
 </html>
+<?php
+}
+?>

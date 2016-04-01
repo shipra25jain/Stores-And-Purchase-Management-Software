@@ -1,13 +1,13 @@
-<?php
+  <?php
 session_start();
 if(!isset($_SESSION['login_user']))
 {
   echo "login first";
 }
 else
-{
-require_once 'include/DB_Functions.php';
-// include_once("Student.html");
+  {
+    require_once 'include/DB_Functions.php';
+// include_once("Faculty.html");
 //require_once 'include/nonlistedItems.php';
 $db = new DB_Functions();
 
@@ -32,7 +32,10 @@ function goback()
 
 <body>
 
+<div id="header">
+Stores and Purchase Management
 
+</div>
 <div>
 <div id="sidebar">
 <?php
@@ -63,37 +66,11 @@ function goback()
      <form action="suggestions.php" method="post" name="frm">
       <div class="form-group">
       <h3>Suggestion</h3>
-      <input name="suggestions" required ="required" type="text" size="100" />
+      <input name="suggestions" type="text" size="100" />
       <div class="reg_section password">
       </div>
      <input name = "sub" type="submit" value="submit"/><br >
       </form>
-    
-
-
-    <?php
-                    $user = $_SESSION['login_user'];
-                    $query = "SELECT  * FROM Institute_member_DB WHERE username = '$user'";
-                    $result = mysql_query($query) or die("query error");
-                    $query_data = mysql_fetch_array($result);
-
-                if($query_data['type']=='Faculty')       
-    {?>
-
-                     <br><br>
-                       <a href="profile.php"><h1>Back</h1></a>
-    <?php   }   ?>
-    <?php
-       if($query_data['type']=='Student')
-        { ?>
-
-    <br><br>
-    <a href="Sprofile.php"><h1>Back</h1></a>
-    
-      <?php } 
-      ?>
-
-
 <?php
   if(isset($_POST['sub']))
   {
@@ -102,24 +79,18 @@ function goback()
   	
     $suggestions = $_POST['suggestions'];
     
-    ?>
-    <br><br>
-
-    <?php
     $db->Suggestions($login_user, $suggestions);
-    ?>
-
-    
+    //echo "success out";
 
 
-<?php
+
   }
  ?>
  </section>
 </div>
-</div>
  </body>
 </html>
+
 <?php
 }
 ?>

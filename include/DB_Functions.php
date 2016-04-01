@@ -24,6 +24,7 @@ class DB_Functions{
      return true ;
   }
 
+
   public function fetchNotifications($Viewer)
  {
     $Ndetails = null;   
@@ -37,7 +38,7 @@ class DB_Functions{
            while($row = mysql_fetch_assoc($result)) 
            {
                  $Ndetails[$i]["ID"]=$row["ID"];
-                 //$Ndetails[$i]["User"]=$row["User"];
+                 $Ndetails[$i]["User"]=$row["User"];
                  $Ndetails[$i]["itemName"] = $row["itemName"];
                  $Ndetails[$i]["quantity"] = $row["quantity"];
                  $Ndetails[$i]["price"] = $row["price"];
@@ -106,6 +107,34 @@ public function remove_request($id)
 
 
 
+ public function removeSuggestions($ID)
+  {
+        $query = "DELETE FROM Suggestions WHERE ID='$ID'";
+        $result = mysql_query($query) or die(" query error2");
+     return true ;
+  }
+  public function fetchSuggestions()
+ {
+    $Ndetails = null;   
+        $login_user = $_SESSION['login_user'];
+        $query="SELECT * from Suggestions ";
+        $result=mysql_query($query) or die("query error3");
+        $num_rows = mysql_num_rows($result);
+        $i = 0;
+        if (mysql_num_rows($result) > 0) 
+        {
+           while($row = mysql_fetch_assoc($result)) 
+           {
+                 $Ndetails[$i]["ID"]=$row["ID"];
+                 $Ndetails[$i]["username"]=$row["username"];
+                 $Ndetails[$i]["suggestions"] = $row["suggestions"];
+                 //$Ndetails[$i]["quantity"] = $row["quantity"];
+
+                    $i++;
+           }      
+        }
+        return $Ndetails;
+}
 
 
 
@@ -225,9 +254,9 @@ public function checkUser($username){
         if ($count==0) {
             $query = "INSERT INTO Login_details (SNo, username, password, type, SecurityQuestion, SecurityAnswer)
                     VALUES ('$SNo', '$username', '$password','$type', '$Security_Question', '$security_answer')";
-                    echo "creating problem!!!";
+                    // echo "creating problem!!!";
         $result=mysql_query($query) or die("query error3");
-        echo "no problem!!!";
+        // echo "no problem!!!";
             return 1;
         }
         else
@@ -242,15 +271,18 @@ public function checkUser($username){
 {
     $username = $_SESSION['login_user'];
   $item = $_SESSION['item1'];
-   $query="SELECT quantity FROM LI_Orders WHERE stakeholder='$username' AND name = '$item'";
+   $query="SELECT * FROM LI_Orders WHERE stakeholder='$username' AND name = '$item'";
 
    $result=mysql_query($query) or die("query error");
+   //echo $result;
 
 
 
 //$_SESSION['myid'] = $value->id;
 
    $num_rows = mysql_num_rows($result);
+   //echo "No of rows";
+   //echo $num_rows;
    //$query_data=mysql_fetch_array($result);
    $row = mysql_fetch_assoc($result);
    $quantity = $row["quantity"];
@@ -281,6 +313,7 @@ public function checkUser($username){
    $result=mysql_query($query) or die("query error");
    $row = mysql_fetch_assoc($result);
    $inv_quantity = $row['quantity'];
+   //echo $inv_quantity;
    $inv_quantity = $inv_quantity + $return_quantity;
    $query="UPDATE Inventory_items_DB SET quantity = '$inv_quantity' WHERE name = '$item'";
 
@@ -293,9 +326,9 @@ public function checkUser($username){
 {
     $username = $_SESSION['login_user'];
   $item = $_SESSION['item1'];
-   $query="SELECT quantity FROM NLI_Orders WHERE stakeholder='$username' AND name = '$item'";
+   $query="SELECT quantity FROM NLI_Orders WHERE User='$username' AND itemName = '$item'";
 
-   $result=mysql_query($query) or die("query error");
+   $result=mysql_query($query) or die("query error1");
 
 
 
@@ -337,7 +370,23 @@ public function checkUser($username){
 
    $result=mysql_query($query) or die("query error");*/
 }
+public function checkUserValidity($username)
+{
+  $query="SELECT * FROM Login_details WHERE username = '$username' ";
+      $result=mysql_query($query) or die("query error");
 
+        $count=mysql_num_rows($result);
+        if($count>0)
+        {
+            return 1 ;
+        }
+
+        else
+        {
+          return 0;
+        }
+
+}
 public function Suggestions($login_user, $suggestions)
 {
   $query="INSERT INTO Suggestions(username, suggestions) VALUES ('$login_user', '$suggestions')";

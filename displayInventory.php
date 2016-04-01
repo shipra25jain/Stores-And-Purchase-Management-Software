@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
 include_once("Admin.html");
 require_once 'include/DB_Functions.php';
 require_once 'include/nonlistedItems.php';
@@ -36,9 +42,9 @@ function goback()
 </div>
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div>
-  <p>Reached </p>
+  <!-- <p>Reached </p> -->
  <?php
-    echo "LISTED PRODUCT ORDERS";
+    // echo "LISTED PRODUCT ORDERS";
     ?>
     <br><br><br><br>
     <?php
@@ -59,11 +65,11 @@ function goback()
 
 <tr>
   <!-- <td  width= 20% > <?php echo "SNo"; ?> </td> -->
-  <td  width= 25% > ItemId</td>
-  <td  width= 25% > Item Name </td>
-  <td  width= 25% > Consumability </td>
-  <td  width= 25% > Quantity </td>
-  <td  width= 25% > Price </td>
+  <td  width= 25% > <b>ItemId</b></td>
+  <td  width= 25% > <b>Item Name</b> </td>
+  <td  width= 25% > <b>Consumability</b> </td>
+  <td  width= 25% > <b>Quantity </b> </td>
+  <td  width= 25% > <b>Price </b> </td>
 </tr>
 
 </table>
@@ -77,11 +83,11 @@ function goback()
 
 <tr>
   <!-- <td width= 20% > <?php echo $row['SNo']; ?> </td> -->
-  <td width= 23%> <?php echo $row['itemID']; ?> </td>
-  <td width= 23%> <?php echo $row['name']; ?> </td>
-  <td width= 23%> <?php echo $row['consumability']; ?> </td>
-  <td width= 23%> <?php echo $row['quantity']; ?> </td>
-  <td width= 23%> <?php echo $row['price']; ?> </td>
+  <td width= 25%> <?php echo $row['itemID']; ?> </td>
+  <td width= 25%> <?php echo $row['name']; ?> </td>
+  <td width= 25%> <?php echo $row['consumability']; ?> </td>
+  <td width= 25%> <?php echo $row['quantity']; ?> </td>
+  <td width= 25%> <?php echo $row['price']; ?> </td>
 </tr>
 
 </table>
@@ -97,13 +103,13 @@ function goback()
 }?>
 
 </div>
- <!-- <button style="width:10%" type="submit" name="approve" onClick="window.location='addItem.php'">Add Item</button> -->
+ <button style="width:10%" type="submit" name="approve" onClick="window.location='addItem.php'">Add Item</button> 
  </body>
 </html>
 
 
+<?php
 
+}
 
-
-
-
+?>

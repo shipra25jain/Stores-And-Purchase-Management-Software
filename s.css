@@ -30,7 +30,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
   /*background-color:  #003300;*/
-  background-image: url("images/login.jpg");
+  /*background-image: url("images/login.jpg");*/
 }
 
 ol, ul {

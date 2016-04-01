@@ -1,5 +1,11 @@
 <?php
 session_start();
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
 require_once 'include/DB_Functions.php';
 include_once("Student.html");
 require_once 'include/nonlistedItems.php';
@@ -56,9 +62,6 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
 </div>
 <!-- InstanceBeginEditable name="EditRegion1" -->
 <div>
- <?php
-    echo "LISTED PRODUCTS";
-    ?>
     <br><br>
     <?php
    $username = $_SESSION['login_user'];
@@ -71,17 +74,42 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
    if (mysql_num_rows($result) > 0) {
     // output data of each row
     ?>
-    
-    Item Name
+
+    <br><br><br>
+    <table  table-layout: fixed; >
+
+        <tr>
+          <!-- <td  width= 20% > <?php echo "SNo"; ?> </td> -->
+          <td width =2%> </td>
+
+          <td  width= 20% > <b>Item Name </b> </td>
+          <td  width= 25% > <b>Consumability </b> </td>
+          <td  width= 25% > <b>Quantity </b> </td>
+          <!-- <td  width= 25% > <b>Stakeholder </b> </td> -->
+          <td  width= 25% > <b>Return</b> </td>
+          <td  width= 25% > <b>Repair </b> </td>
+        </tr>
+
+     </table>
     <?php
     while($row = mysql_fetch_assoc($result)) {
       //$_SESSION['item1'] = $row['name'];
       $consumability = $row['consumability'];
       ?>
       <form action="" method="post" name="frm">
-        <table>
+      <input type="hidden" name="name" value="<?php echo $row['name']; ?>">
 
-<tr><td><input name="name" type="text" value="<?php echo $row['name']; ?>" size="10" readonly/></td><td><button  type = "submit" name="Return" class="btn btn-success">Return</button></td><td><button name = "Repair" type = "submit" class="btn btn-success">Repair</button></td></tr>
+        <table class="table" >
+
+              <tr>
+                <td > </td>
+                <td  width = 25% > <?php echo $row['name']; ?> </td>
+                <td  width = 25% > <?php echo $row['consumability']; ?> </td>
+                <td  width = 25% > <?php echo $row['quantity']; ?> </td>
+
+                <td  width = 25% > <button  type = "submit" name="Return" class="btn btn-success">Return</button></td>
+                <td  width = 25% > <button name = "Repair" type = "submit" class="btn btn-success">Repair</button></td>
+              </tr>
 
 </table>
 </form>
@@ -92,10 +120,10 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
     <?php
     }
  else {
-    echo "0 results";
+    // echo "0 results";
 }?>
    
- <br><br>
+ <!-- <br><br>
  <?php
     echo "NON-LISTED PRODUCTS";
     
@@ -182,9 +210,13 @@ if(isset($_POST['Repair']) || isset($_POST['Return']) || isset($_POST['nRepair']
    
 
 
- 
+  -->
 </div>
 
 
  </body>
 </html>
+
+<?php
+}
+?>

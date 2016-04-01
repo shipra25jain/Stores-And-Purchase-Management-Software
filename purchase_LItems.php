@@ -90,7 +90,7 @@ Quantity needed:<br>
     $Viewer = "admin";
     $status = "success";
 
-    $db->convey_requester($Login_user,$Viewer ,$itemName,$myQuantity,$price,$status)
+    $db->convey_requester($login_user,$Viewer ,$itemName,$myQuantity,$price,$status)
     //$li->storeInDatabase();
    // $shareStatus = $li->getSharability();
    //$quantity=$_POST['quantity'];

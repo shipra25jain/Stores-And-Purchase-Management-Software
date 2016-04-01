@@ -1,5 +1,11 @@
  <?php
      session_start();
+     if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+    else
+    {
      require_once 'include/DB_Functions.php';
      include_once("Faculty.html");
      $db = new DB_Functions();
@@ -87,3 +93,6 @@
 
     </body>
 <html>    
+<?php
+}
+?>

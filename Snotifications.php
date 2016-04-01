@@ -76,7 +76,7 @@ $Viewer = $_SESSION['login_user'];
                         Status
                     </th>
                     <th>
-                        Seen
+                        Clear
                     </th>
                 </tr>
 <?php
@@ -96,7 +96,7 @@ $Viewer = $_SESSION['login_user'];
       <td width=10%><input class="form-control" name="price" type="text" value="<?php echo $Ndetails[$i]["price"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="quantity" type="text" value="<?php echo $Ndetails[$i]["quantity"]; ?>" size="20" readonly/></td>
       <td width=10%><input class="form-control" name="status" type="text" value="<?php echo $Ndetails[$i]["status"]; ?>" size="20" readonly/></td>
-      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Seen</button> </td>
+      <td width=10%> <button style="width:45%" type="submit" name="seen" class="btn btn-success">Clear</button> </td>
       </tr>
      
       

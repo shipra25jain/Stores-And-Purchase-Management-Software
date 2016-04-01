@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include_once("login.html");
+	
 	require_once 'include/DB_Functions.php';
 	$db = new DB_Functions();
  if(isset($_POST['sub'])) {

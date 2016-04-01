@@ -39,6 +39,17 @@ class approve_deny{
     		return false;
     	}
     }
+ public function remove_suggestions($ID)
+    {
+        $this->db->removeSuggestions($ID);
+        return true;
+    }
+    public function fetch_suggestions()
+    {
+        $Ndetails = null;
+        $Ndetails = $this->db->fetchSuggestions();
+        return $Ndetails;
+    }
 
     public function remove_notifications($ID)
     {

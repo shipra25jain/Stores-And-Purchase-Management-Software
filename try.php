@@ -1,6 +1,12 @@
 <?php 
 session_start();
 //include_once("Faculty.html");
+if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+else
+{
 require_once 'include/DB_Functions.php';
 require_once 'include/listedItems.php';
 $db = new DB_Functions();
@@ -11,6 +17,8 @@ $db = new DB_Functions();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="admin.css" rel="stylesheet" type="text/css" />
+<link href="s.css" rel = "stylesheet" type="text/css">
+
 <script type="text/javascript" src="slider.js"></script>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript">
@@ -26,7 +34,7 @@ function goback()
 <body>
 
 <div id="header">
-Stores and Purchase Management
+<!-- Stores and Purchase Management -->
 
 </div>
 <div>
@@ -34,14 +42,15 @@ Stores and Purchase Management
 
 </div>
 <!-- InstanceBeginEditable name="EditRegion1" -->
-<div>
+<!-- <div>
 <form action="/tpa/try.php" method="post" name="frm">
 <B>Items:</B>
 <br>
 Quantity needed to be returned:<br>
+
 <input name="quantity" type="number" min = "1" />
 <br>
-<input name="sub" type="submit" value="submit"/><br>
+<input name="sub" type="submit" value="submit"/><br> -->
 <?php
 //echo "item: ".$_SESSION['item1'];
 //echo "status: ".$_SESSION['status'];
@@ -49,6 +58,41 @@ Quantity needed to be returned:<br>
 
 </form>
 </div>
+
+
+<div class="container">
+    <section class="register">
+      <h1> Items: </h1>
+<form action="/tpa/try.php" method="post" name="frm">
+      <div class="form-group">
+      <h3>Quantity needed to be returned:</h3>
+      <br><br>
+      <input name="quantity" type="number" min = "1" />
+      <div class="reg_section password">
+      </div>
+     <input name = "sub" type="submit" value="submit"/><br >
+      </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   <?php 
@@ -64,13 +108,16 @@ Quantity needed to be returned:<br>
     }
     else if ($_SESSION['status'] == 'nrepair') {
       $_SESSION['return_quantity'] = $_POST['quantity'];
+      
       $db->Repair_nl_item();
     }
     
    // echo $_SESSION['return_quantity'];
-    
+    if($_SESSION['login_user']=='Faculty')
     echo "<a href='myord.php'> myorders </a>";
-      
+   else if($_SESSION['utype']=='Student')
+    echo "<a href='Smyord.php'> myorders </a>";
+  
 ?>
       
 
@@ -85,3 +132,6 @@ Quantity needed to be returned:<br>
 
 </body>
 </html>
+<?php
+}
+?>

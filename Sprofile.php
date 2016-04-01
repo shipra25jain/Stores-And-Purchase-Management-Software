@@ -1,6 +1,12 @@
  <?php
      session_start();
-     require_once 'include/DB_Functions.php';
+     if(!isset($_SESSION['login_user']))
+{
+  echo "login first";
+}
+     else
+        {
+            require_once 'include/DB_Functions.php';
      include_once("Student.html");
      $db = new DB_Functions();
 
@@ -57,7 +63,19 @@
                     ?>
                 </td>
             </tr>
+            <tr>
+              <td>
+                    <b>RoomNo. : </b>
+                </td>
+                <td>
+                    <?php
+                    echo $query_data['roomNumber'];
+                    ?>
+                </td>
+            </tr>
               </table>
     </body>
 <html>    
-
+<?php
+}
+?>
